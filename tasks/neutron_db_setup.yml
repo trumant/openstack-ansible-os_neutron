@@ -122,13 +122,8 @@
     state: started
     pattern: "neutron-server"
   delegate_to: "{{ item }}"
-<<<<<<< HEAD
-  with_items: groups[neutron_services['neutron-server']['group']]
-  when: (neutron_migrations is defined and neutron_migrations['run_contract']|bool) or neutron_plugin_type != 'ml2'
-=======
   with_items: "{{ groups[neutron_services['neutron-server']['group']] }}"
   when: (neutron_migrations is defined and neutron_migrations['run_contract']|bool) or neutron_plugin_type.split('.')[0] != 'ml2'
->>>>>>> 656a976... Implementing neutron_openvswitch_agent
   tags:
     - neutron-db-setup
     - neutron-upgrade
